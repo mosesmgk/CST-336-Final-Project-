@@ -1,0 +1,203 @@
+<%- include ('partials/header.ejs') %>
+<body>
+    <main>
+        <h1>Admin Panel</h1>
+        
+        <h2 Using STYLE="text-transform:capitalize" >Welcome Admin  <%=username %>!</h2>
+        
+        <form action="/logout">
+            <button  class="btn btn-success">
+                Logout
+            </button>
+        </form>
+        
+        <br><br>
+        
+        <form action="/addAdmin"><button class="btn btn-info">Add a new Admin</button></form>
+        
+        <br>
+        
+        <form action="/addProduct"><button class="btn btn-info">Add a new Product</button></form>
+        
+        <br>
+        
+        <button id ="showAdmins" class="btn btn-info">Admin Information</button>
+        
+        <!--Admin table is hidden until button is clicked -->
+        <div class="container">
+        <div id="admins" style="display: none" align="center">
+            <h2>Admins</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Remove</th>
+                    
+                </tr>
+                <tr>
+                    <%rows2.forEach(function(row, i){ %>
+                    <td><%= row["id"] %></td>
+                    <td><%= row["username"] %></td>
+                    <td><button class = "removeAdmin btn btn-danger" value = <%= row["id"] %>>Remove</button></td>
+                    
+                </tr>
+                    <% });%>
+            </table>
+        </div>
+        </div>
+        
+        <br>
+        
+        <button id ="showFavorites"  class="btn btn-info" >Favorites Information</button>
+        
+         <!--Favorites table is hidden until button is clicked -->
+         <div class="container">
+        <div id="favorites" style="display: none" align="center">
+             <h2>Favorites</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Remove</th>
+                </tr>
+                <tr>
+                    <%rows3.forEach(function(row, i){ %>
+                    <td><%= row["id"] %></td>
+                    <td><%= row["make"] %></td>
+                    <td><button class = "removeFavorite btn btn-danger" value = <%= row["id"] %>>Remove</button></td>
+                </tr>
+                    <% });%>
+            </table>
+        </div>
+        </div>
+    
+        <br>
+        <button id="showInventory"  class="btn btn-info">Inventory Information</button>
+        
+        <!--Invenotry table is hidden until button is clicked -->
+        <div class="container">
+        <div id="inventory"  style="display: none" align="center">
+             <h2>Inventory</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Make</th>
+                    <th>Quantity</th>
+                    </tr>
+                <tr>
+                    <%rows4.forEach(function(row, i){ %>
+                    <td><%= row["id"] %></td>
+                    <td><%= row["make"] %></td>
+                    <td><%= row["quantity"]%></td>
+                </tr>
+                <% });%>
+            </table>
+        </div>
+        </div>
+
+        <br>
+        <button id="showProducts"  class="btn btn-info" >Products Information</button>
+        <br>
+        
+        <!--Product table is hidden until button is clicked -->
+        <div class="container">
+        <div id="products" style="display: none" align="center">
+             <h2>Products</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Manufacturer</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th>Picture</th>
+                    <th>Remove</th>
+                    <th>Update</th>
+                </tr>
+                <tr>
+                <%rows.forEach(function(row){ %>
+                    <td><%= row["id"]%></td>
+                    <td><%= row["make"] %></td>
+                    <td><%= row["model"] %></td>
+                    <td><%= row["manufacturer"]%></td>
+                    <td> <%= row["type"] %></td>
+                    <td> <%= row["price"] %></td>
+                    <td> <img src =<%= row["pictureURL"]%> alt= <%= row["model"] %> width="200" height="200"></td>
+                    <td><button class = "removeProduct  btn btn-danger" value = <%= row["id"] %>>Remove</button></td>
+                    <td><button class = "changeProduct  btn btn-warning" value = <%= row["id"] %>>Update</button></td>
+                </tr>
+                <% });%>
+            </table>
+            
+        
+
+              <!--Form is hidden until button is clicked -->
+            <div id="updateProductFrom" style="display: none" align="center">
+                
+                <h2>Update Product</h2>  
+                
+                <form action="/api/updateProducts">
+                    <input id = "make" type="text" placeholder = "Type make" name ="make" required/>
+                    <input id = "model" type="text" placeholder = "Type model" name ="model" required/>
+                    <input id = "manufacturer" type="text" placeholder = "Type manufacturer" name ="manufacturer" required/>
+                    <input id = "type" type ="text" placeholder = "Type type" name ="type" required/>
+                    <input id = "price" type="text" placeholder = "Type price" name ="price" required/>
+                    <input id = "description" type="text" placeholder = "Type description" name ="description" required/>
+                    <input id ="pictureURL"type="text" placeholder = "Type pictureURL" name ="pictureURL" required/>
+                    <br><br>
+                    <button class="btn btn-warning">Update</button>
+                </form>
+            
+            </div>
+            
+            <h2>Update Inventory</h2>
+            
+            <form action="/api/updateInventory">
+                <input type="number" placeholder = "Product Number" name ="product_id" min="1" max="100" required/>
+                <input type="number" placeholder = "Quantity" name ="quantity" min="0" max="100" required/>
+                <br><br>
+                <button class="btn btn-warning">Update</button>
+            </form>
+            
+        </div>
+        </div>
+        <br>
+        
+        
+        <button id="statistics" class="btn btn-info">The Tech Guys Store Statistics</button>
+        
+        
+         <!--All tables are hidden until button is clicked -->
+    <div class="container">
+        <div id ="staticsTables" style="display: none" align="center">
+            <h3>Stock by Manufacturer</h3>
+            <table id = "stockByMan">
+                <tr>
+                    <th>Manufacturer</th>
+                    <th>Number of Makes in Stock</th>
+                </tr>
+
+            </table>
+            
+            <h3>Total Value of Products in Stock By Type</h3>
+            <table id = "priceByType">
+                <tr>
+                    <th>Product Type</th>
+                    <th>Value</th>
+                </tr>
+            </table>
+            
+            <h3>Total Number of Products in Stock By Type</h3>
+            
+            <table id = "productsInStockByType">
+                <tr>
+                    <th>Product Type</th>
+                    <th>Amount in Stock</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+        <br><br>
+    </main>
+<%- include ('partials/footer.ejs') %>

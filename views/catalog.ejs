@@ -1,0 +1,38 @@
+<%- include ('partials/header.ejs') %>
+<body>
+    <h1> Products </h1>
+    <br><br>
+    <main>
+        <form>
+            <h3> Keyword </h3>
+            <input id="make" type="text" placeholder="Enter a word">
+            <br><br>
+            <h3> Manufacturer </h3>
+            <input id="manufacturer" type="text" placeholder="Enter a word">
+            <br><br>
+        <h3> Type </h3>
+        <select name="type" id="partType">
+            <option value=""> Select One</option>
+            <option value="ram">RAM</option>
+            <option value="Hard Drive">Hard Drive</option>
+            <option value="graphics">Graphics Card</option>
+            <option value="motherboard">Motherboard</option>
+            <option value="cpu">CPU</option>
+        </select>
+        </form>
+        <br><br>
+        <button type="button" id="btnSearch" class="btn btn-primary">Search</button>
+        <br><br>
+        <span id="searchError"></span><br>
+        <div class="container">
+            <div id="shoppingCart">
+                    <div id="displayHeader">
+                        <div id="productPage">
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </main>
+
+
+<%- include ('partials/footer.ejs') %>

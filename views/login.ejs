@@ -1,0 +1,18 @@
+<%- include ('partials/header.ejs') %>
+    <body>
+        <h1 class = "title">The Tech Guys&trade; - Admin Login</h1>
+        <main>
+         
+        <form method = "POST">
+            
+            Username: <input type="text" name="username">
+            <br><br>
+            Password:<input type="password" name="password">
+            <br>
+            <br><button class="btn btn-primary">Login!</button>
+        </form>
+        <% if (typeof loginError != "undefined" && loginError){ %>
+            <h3 class="error">Wrong credentials!</h3>
+        <% }%>
+        </main>
+<%- include ('partials/footer.ejs') %>

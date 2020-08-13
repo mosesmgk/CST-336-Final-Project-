@@ -1,0 +1,31 @@
+body {
+	text-align: center;
+}
+
+.copyright {
+	text-align: right;
+	padding: 50px;
+}
+
+.navbar {
+     border-radius: 10px;
+}
+
+.navbar-default {
+	background: #2871cc;
+}
+
+.favoriteItemContainer{
+	display: flex;
+	padding: 100px;
+}
+
+.favoriteItem {
+	flex: 1;
+	padding: 20px;
+	border: 2px solid blue;
+	border-radius: 15px;
+	margin-right: 50px;
+    margin-left: 50px;
+    background: #d3e9fe;
+}
